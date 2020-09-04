@@ -29,7 +29,7 @@ print("Copyright (C) Antony Jr.")
 print("")
 
 
-if len(sys.argv) < 2:
+if len(sys.argv) < 3:
     print("Usage: ./PyJoinMeetUserData.py [Google Username] [Export Filename]")
     sys.exit()
 
