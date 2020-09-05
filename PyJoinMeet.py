@@ -15,6 +15,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 
 
+def getMinValue(now):
+    return (now.hour * 60) + now.minute
+
 print("PyJoinMeet v0.0.1, A Simple Python Script to Join a Google Meet")
 print("Copyright (C) Antony Jr.")
 print("")
@@ -111,16 +114,20 @@ while True:
         print("WARNING: Invalid day range, abort.")
         break;
 
-    now = datetime.now(timezone) # Get the required current time.
-
-    if days[start_day] <= now.day and days[end_day] >= now.day:
+    if now.day >= days[start_day] and now.day <= days[end_day]:
         print("INFO: Wating for the right time to join class")
 
         start = start_time.split(':')
         end = end_time.split(':')
 
-        if int(start[0]) == now.hour and int(start[1]) <= now.minute and int(end[0]) >= now.hour and int(end[1]) > now.minute:
-            print("Now Hour: {}, Now Minute: {}".format(now.hour, now.minute))
+        # Convert everything to minutes.
+        startMinValue = (int(start[0]) * 60) + int(start[1]) 
+        endMinValue = (int(end[0]) * 60) + int(end[1])
+        
+        now = datetime.now(timezone) # Get the required current timee
+        nowMinValue = getMinValue(now)
+
+        if startMinValue <= nowMinValue and endMinValue >= nowMinValue:
             # Join the class now
             print("INFO: Joining Meet {} as {}.".format(google_meet_url, actual_user))
 
@@ -147,10 +154,11 @@ while True:
                     print("WARNING: Cannot JOIN")
 
                 now = datetime.now(timezone) # Get the required current time.
-                if int(end[0]) >= now.hour and int(end[1]) > now.minute:
-                    time.sleep(30)
-                else:
+                nowMinValue = getMinValue(now)
+                if nowMinValue > endMinValue:
                     break
+                time.sleep(30)
+
             # End Class
             if joined:
                 print("Now Hour: {}, Now Minute: {}".format(now.hour, now.minute))
