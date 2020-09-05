@@ -114,6 +114,7 @@ while True:
         print("WARNING: Invalid day range, abort.")
         break;
 
+    now = datetime.now(timezone)
     if now.day >= days[start_day] and now.day <= days[end_day]:
         print("INFO: Wating for the right time to join class")
 
