@@ -21,7 +21,7 @@ print("")
 
 
 if len(sys.argv) < 3:
-    print("Usage: ./PyJoinMeetUserData.py [Google Username] [Google Meet URL]")
+    print("Usage: ./PyJoinMeet.py [Google Username] [Google Meet URL]")
     sys.exit()
 
 

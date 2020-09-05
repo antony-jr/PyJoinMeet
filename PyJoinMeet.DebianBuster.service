@@ -1,0 +1,12 @@
+[Unit]
+Description=PyJoinMeet Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/python /root/PyJoinMeet.py [Your Username] [Your Google Meet Url]
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
