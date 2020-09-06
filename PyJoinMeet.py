@@ -78,8 +78,8 @@ config = configparser.ConfigParser()
 config.read('{}/{}/pyjoinmeet.ini'.format(data_dir, google_user))
 
 days = {
-    "monday" : 7,
-    "mon" : 7,
+    "monday" : 0,
+    "mon" : 0,
     "tuesday" : 1,
     "tue": 1,
     "wednesday" : 2,
@@ -115,7 +115,7 @@ while True:
         break;
 
     now = datetime.now(timezone)
-    if now.day >= days[start_day] and now.day <= days[end_day]:
+    if now.weekday() >= days[start_day] and now.weekday() <= days[end_day]:
         print("INFO: Wating for the right time to join class")
 
         start = start_time.split(':')

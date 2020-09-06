@@ -108,8 +108,8 @@ class BotInstance(object):
         })
 
         days = {
-            "monday" : 7,
-            "mon" : 7,
+            "monday" : 0,
+            "mon" : 0,
             "tuesday" : 1,
             "tue": 1,
             "wednesday" : 2,
@@ -166,13 +166,8 @@ class BotInstance(object):
                 break;
             self.lock.release()
 
-            if start_day not in days or end_day not in days:
-                print("WARNING: Invalid day range, abort.")
-                send_message(self.token, self.chatid, "[!] Could not add, Error at server".format(google_meet_url, actual_user))
-                break;
-
             now = datetime.now(timezone)
-            if now.day >= days[start_day] and now.day <= days[end_day]:
+            if now.weekday() >= days[start_day] and now.weekday() <= days[end_day]:
                 print("INFO: {}:: Wating for the right time to join class".format(google_meet_url))
 
                 start = start_time.split(':')
