@@ -30,3 +30,10 @@ Now Finally Run.
 ```
  $ ./PyJoinMeet.py [GOOGLE Meet URL] [Your Username Only]
 ```
+
+# Using Telegram Bot
+
+Set your **API Token** in the environmental variable ```PYJOINMEET_BOT_TOKEN```. Then you have to add your Telegram userid to 
+the ```PyJoinMeetBot.json``` file as a json array. Only userid present in the file will be allowed access.
+
+Now copy the PyJoinMeetBot.json to ```~/PyJoinMeet/PyJoinMeetBot.json```.

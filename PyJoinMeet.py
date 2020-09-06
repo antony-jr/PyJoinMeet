@@ -78,8 +78,8 @@ config = configparser.ConfigParser()
 config.read('{}/{}/pyjoinmeet.ini'.format(data_dir, google_user))
 
 days = {
-    "monday" : 0,
-    "mon" : 0,
+    "monday" : 7,
+    "mon" : 7,
     "tuesday" : 1,
     "tue": 1,
     "wednesday" : 2,
