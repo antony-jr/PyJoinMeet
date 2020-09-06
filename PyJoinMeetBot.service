@@ -1,0 +1,13 @@
+[Unit]
+Description=PyJoinMeet Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Environment="PYJOINMEET_BOT_TOKEN=<your telegram api token>"
+ExecStart=/usr/bin/python /root/PyJoinMeetBot.py [Your Timezone]
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
