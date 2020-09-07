@@ -165,7 +165,7 @@ while True:
                 print("Now Hour: {}, Now Minute: {}".format(now.hour, now.minute))
                 print("INFO: Leaving Meet {} as {}.".format(google_meet_url, actual_user))
                 driver.close()
-
+                driver.quit()
             else:
                 print("FATAL: Did not attend session because could not join")
 
