@@ -418,8 +418,24 @@ def main():
             userid = str(i['message']['from']['id'])
             chatid = str(i['message']['chat']['id'])
             if userid not in allowed_userids.keys():
-                message = "You are not an authorized user. You have been shot!"
-                send_message(token, chatid, message)
+                text = i['message']['text']
+                text_split = text.split(' ')
+                args = []
+                for i in text_split:
+                    if len(i) == 0:
+                        continue
+                    args.append(i)
+
+                msg = None
+                if args[0].lower() == '/start':
+                    msg = "Welcome to PyJoinMeet, A Python Script to Join Google Meet Automatically.\n"
+                    msg += "PyJoinMeet is made by Antony Jr.(https://antonyjr.in).\n\n"
+                    msg += "You are not authorized with this server.\n"
+                    msg += "You're Telegram UserID: {}"
+                    msg = msg.format(userid)
+                else:
+                    msg = "You are not an authorized user. You have been shot!"
+                send_message(token, chatid, msg)
                 continue
 
             try:
@@ -437,6 +453,12 @@ def main():
                     continue
                 args.append(i)
 
+            if args[0].lower() == '/start':
+                msg = "Welcome to PyJoinMeet, A Python Script to Join Google Meet Automatically.\n"
+                msg += "PyJoinMeet is made by Antony Jr.(https://antonyjr.in).\n\n"
+                msg += "You are currently authorized with this server.\n"
+                msg += "Type /help to get more info on how to use this."
+                continue
             if args[0].lower() == 'my':
                 if len(args) != 2:
                     send_message(token, chatid, "Available my commands: my schedule, my account")
