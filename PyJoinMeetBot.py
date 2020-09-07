@@ -458,6 +458,7 @@ def main():
                 msg += "PyJoinMeet is made by Antony Jr.(https://antonyjr.in).\n\n"
                 msg += "You are currently authorized with this server.\n"
                 msg += "Type /help to get more info on how to use this."
+                send_message(token, chatid, msg)
                 continue
             if args[0].lower() == 'my':
                 if len(args) != 2:
