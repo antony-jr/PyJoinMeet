@@ -213,8 +213,32 @@ class BotInstance(object):
             self.remove()
             return;
 
+        try:
+            start0 = int(start[0])
+            start1 = int(start[1])
+            end0 = int(end[0])
+            end1 = int(end[1])
+        except:
+            send_message(self.token, self.chatid, "[!] Could not add, Invalid time value. Must be a Integer")
+            self.remove()
+            return;
+
+
+
         if (int(start[0]) * 60) + int(start[1]) > (int(end[0]) * 60) + int(end[1]):
             send_message(self.token, self.chatid, "[!] Could not add, Invalid Time Range. Must  From < To")
+            self.remove()
+            return;
+
+        try:
+            res = requests.get(google_meet_url);
+
+            if res.status_code >= 400:
+                send_message(self.token, self.chatid, "[!] Could not add, Cannot react {}".format(google_meet_url))
+                self.remove()
+                return;
+        except:
+            send_message(self.token, self.chatid, "[!] Could not add, Cannot reach {}".format(google_meet_url))
             self.remove()
             return;
 
@@ -710,7 +734,7 @@ def main():
                         send_message(token, chatid, "You can send: stop <google meet url or nickname> to stop the meeting and remove it from schedule.")
                         nick_store_lock.release()
                         continue
-            nick_store_lock.release()
+                nick_store_lock.release()
 
             BotInstance(google_meet_url, actual_user, start_time, end_time, start_day, end_day, token, chatid, nick)
 
