@@ -439,8 +439,12 @@ def main():
             offset = int(i['update_id']) + 1
 
             # Check if the user is allowed
-            userid = str(i['message']['from']['id'])
-            chatid = str(i['message']['chat']['id'])
+            try:
+                userid = str(i['message']['from']['id'])
+                chatid = str(i['message']['chat']['id'])
+            except:
+                continue
+
             if userid not in allowed_userids.keys():
                 text = i['message']['text']
                 text_split = text.split(' ')
