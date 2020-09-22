@@ -738,6 +738,8 @@ def main():
                         send_message(token, chatid, "You can send: stop <google meet url or nickname> to stop the meeting and remove it from schedule.")
                         nick_store_lock.release()
                         continue
+                    else:
+                        nick_store[actual_user][nick] = google_meet_url
                 nick_store_lock.release()
 
             BotInstance(google_meet_url, actual_user, start_time, end_time, start_day, end_day, token, chatid, nick)
